@@ -1,4 +1,23 @@
 services:
+  nginx:
+    container_name: nginx-dns
+    image: nginx:latest
+    networks:
+      dns:
+        ipv4_address: 172.30.0.2
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      TZ: ${TZ}
+      NGINX_SERVER_NAME: ${NGINX_SERVER_NAME}
+    volumes:
+      - './src/nginx/nginx.conf:/etc/nginx/nginx.conf'
+      - './src/nginx/conf.d:/etc/nginx/conf.d'
+    depends_on:
+      - pihole
+      - unbound
+    restart: unless-stopped
 
   pihole:
     container_name: pihole-dns
@@ -18,8 +37,25 @@ services:
     volumes:
       - './src/pihole/persist/pihole:/etc/pihole'
       - './src/pihole/persist/dnsmasq.d:/etc/dnsmasq.d'
+    depends_on:
+      - unbound
     restart: unless-stopped
-
+  
+  unbound:
+      container_name: unbound-dns
+      image: "mvance/unbound:latest"
+      networks:
+        dns:
+          ipv4_address: 172.30.0.4
+      ports:
+        - "53:53/tcp"
+        - "53:53/udp"
+      environment:
+        TZ: ${TZ}
+        WEBPASSWORD: ${UNBOUND_WEBPASSWORD}
+      volumes:
+        - "./src/unbound:/opt/unbound/etc/unbound"
+      restart: unless-stopped
 
 networks:
   dns:
