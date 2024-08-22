@@ -1,0 +1,16 @@
+[Unit]
+Description=Start the secure and private DNS stack
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+ExecStart=/usr/bin/docker start -a pihole-dns
+ExecStart=/usr/bin/docker start -a unbound-dns
+ExecStart=/usr/bin/docker start -a nginx-dns
+ExecStop=/usr/bin/docker stop -t 2 pihole-dns
+ExecStop=/usr/bin/docker stop -t 2 unbound-dns
+ExecStop=/usr/bin/docker stop -t 2 nginx-dns
+
+[Install]
+WantedBy=local.target
