@@ -1,0 +1,29 @@
+services:
+
+  pihole:
+    container_name: pihole-dns
+    image: pihole/pihole:latest
+    hostname: ${PIHOLE_HOSTNAME}
+    networks:
+      dns:
+        ipv4_address: 172.30.0.3
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+    environment:
+      TZ: ${TZ}
+      WEBPASSWORD: ${PIHOLE_WEBPASSWORD}
+      DNS1: '172.30.0.4'
+      DNS2: 'none'
+    volumes:
+      - './src/pihole/persist/pihole:/etc/pihole'
+      - './src/pihole/persist/dnsmasq.d:/etc/dnsmasq.d'
+    restart: unless-stopped
+
+
+networks:
+  dns:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.30.0.0/24
