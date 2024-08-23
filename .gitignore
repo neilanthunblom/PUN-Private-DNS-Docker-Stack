@@ -3,3 +3,4 @@
 
 src/unbound/*
 src/pihole/persist/*
+certs/*
