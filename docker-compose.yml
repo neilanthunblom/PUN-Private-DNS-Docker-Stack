@@ -53,6 +53,7 @@ services:
         WEBPASSWORD: ${UNBOUND_WEBPASSWORD}
       volumes:
         - "./src/unbound:/opt/unbound/etc/unbound"
+      command: ["unbound", "-d"]
       restart: unless-stopped
 
 networks:
