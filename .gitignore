@@ -4,3 +4,4 @@
 src/unbound/*
 src/pihole/persist/*
 certs/*
+src/nginx/conf.d/*
