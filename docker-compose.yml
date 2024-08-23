@@ -43,7 +43,7 @@ services:
   
   unbound:
       container_name: unbound-dns
-      image: "mvance/unbound-pi:latest"
+      image: "mvance/unbound-rpi:latest"
       networks:
         dns:
           ipv4_address: 172.30.0.4
