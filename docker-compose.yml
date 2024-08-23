@@ -13,6 +13,7 @@ services:
       NGINX_SERVER_NAME: ${NGINX_SERVER_NAME}
     volumes:
       - './src/nginx/nginx.conf:/etc/nginx/nginx.conf'
+      - './src/nginx/conf.d:/etc/nginx/conf.d/'
     depends_on:
       - pihole
       - unbound
@@ -47,9 +48,6 @@ services:
       networks:
         dns:
           ipv4_address: 172.30.0.4
-      ports:
-        - "53:53/tcp"
-        - "53:53/udp"
       environment:
         TZ: ${TZ}
         WEBPASSWORD: ${UNBOUND_WEBPASSWORD}
