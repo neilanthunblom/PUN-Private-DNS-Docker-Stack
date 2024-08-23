@@ -39,10 +39,9 @@ if [ ! -f "$UNBOUND_DIR/unbound.conf" ]; then
 server:
     verbosity: 1
     num-threads: 2
-    interface: 0.0.0.0
-    access-control: 0.0.0.0/0 refuse
+    interface: 172.30.0.4
     access-control: 127.0.0.0/8 allow
-    access-control: ::1 allow
+    access-control: 172.30.0.0/24 allow
     port: 53
     do-ip4: yes
     do-ip6: no
@@ -61,7 +60,6 @@ server:
     rrset-cache-size: 100m
     msg-cache-size: 50m
     root-hints: "/opt/unbound/etc/unbound/root.hints"
-    include: "/opt/unbound/etc/unbound/unbound.conf.d/pi-hole.conf"
 EOT
 
   # Download the root hints file
