@@ -36,6 +36,7 @@ services:
     volumes:
       - './src/pihole/persist/pihole:/etc/pihole'
       - './src/pihole/persist/dnsmasq.d:/etc/dnsmasq.d'
+      - './src/pihole/persist/log:/var/log'
     depends_on:
       - unbound
     restart: unless-stopped
