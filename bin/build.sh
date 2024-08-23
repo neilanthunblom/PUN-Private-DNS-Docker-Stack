@@ -95,7 +95,7 @@ if [ ! -f "$UNBOUND_DIR/unbound.conf" ]; then
 server:
     verbosity: 1
     num-threads: 2
-    interface: 172.30.0.4
+    interface: 0.0.0.0
     access-control: 127.0.0.0/8 allow
     access-control: 172.30.0.0/24 allow
     port: 53
