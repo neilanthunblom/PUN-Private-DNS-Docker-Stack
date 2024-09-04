@@ -40,8 +40,8 @@ fi
 source "$SCRIPT_DIR/.env"
 
 output_message "Checking if stack is currently running" "always"
-if systemctl is-active --quiet pvt-dns.service; then
-    sudo systemctl stop pvt-dns.service
+if systemctl is-active --quiet PUNGuardDNS.service; then
+    sudo systemctl stop PUNGuardDNS.service
     output_message "Stack WAS running. (Stopped :) )" "always"
 fi
 
@@ -123,7 +123,7 @@ EOT
 fi
 
 # SERVICE -----------------------------------------------------
-SERVICE_FILE="/etc/systemd/system/pvt-dns.service"
+SERVICE_FILE="/etc/systemd/system/PUNGuardDNS.service"
 output_message "Checking the service configuration" "always"
 
 if [ -f "$SERVICE_FILE" ]; then
@@ -144,7 +144,7 @@ ExecStop=/usr/bin/docker-compose -f $SCRIPT_DIR/docker-compose.yml down
 WantedBy=multi-user.target
 EOT
 ); then
-        sudo systemctl stop pvt-dns.service
+        sudo systemctl stop PUNGuardDNS.service
         sudo rm "$SERVICE_FILE"
         output_message "Service file was different. Recreating it."
 
@@ -164,7 +164,7 @@ WantedBy=multi-user.target
 EOT
         output_message "Reloading the daemon" "always"
         sudo systemctl daemon-reload
-        sudo systemctl enable pvt-dns.service
+        sudo systemctl enable PUNGuardDNS.service
         output_message "Service file updated and reloaded."
     fi
 else
@@ -184,11 +184,11 @@ WantedBy=multi-user.target
 EOT
     output_message "Reloading the daemon" "always"
     sudo systemctl daemon-reload
-    sudo systemctl enable pvt-dns.service
+    sudo systemctl enable PUNGuardDNS.service
     output_message "Service file created and loaded."
 fi
 
 output_message "Starting the stack" "always"
-if ! systemctl is-active --quiet pvt-dns.service; then
-    sudo systemctl start pvt-dns.service
+if ! systemctl is-active --quiet PUNGuardDNS.service; then
+    sudo systemctl start PUNGuardDNS.service
 fi
