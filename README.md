@@ -1,4 +1,4 @@
-# PUN (Pihole, Unbound, Nginx) - Privacy enhanced Pi-hole with Unbound and Nginx
+# PUNGuard DNS - Privacy enhanced Pi-hole with Unbound and Nginx
 
 ## Overview
 
@@ -37,8 +37,8 @@ This this stack is designed to be a semi-automated deployment of the same config
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/neilanthunblom/PUN-Private-DNS-Docker-Stack
-cd PUN-Private-DNS-Docker-Stack
+git clone https://github.com/neilanthunblom/PUNGuardDNS
+cd PUNGuardDNS
 ```
 
 ### 2. Copy the `sample.env` to `.env` and edit the configuration
