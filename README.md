@@ -2,9 +2,9 @@
 
 ## Overview
 
-This is a simple project to create a local dns server using a Raspberry Pi. It uses Pi-hole for ad blocking and local DNS along with Unbound for DoT and a secure recursive resolver. This is all wrapped up in an Nginx reverse proxy to provide a secure web interface for Pi-hole inspection and configuration.
+This is a simple project to create a local, privacy and security focused, DNS resolver/sinkhole using a Raspberry Pi. It uses Pi-hole for ad blocking, local DNS for assigning resolvable urls to LAN clients, along with Unbound for DoT and a secure recursive resolver to mitigate ISP data mining. This is all run behind an Nginx reverse proxy to provide a secure and maintanable web interface for Pi-hole inspection and configuration.
 
-TL;DR: This is a privacy enhanced Pi-hole setup with DoT and a reverse proxy for secure access to the web interface. All wrapped up in docker compose with a bash script to configure and manage the stack.
+**TL;DR: This is a privacy enhanced Pi-hole setup with DoT and a reverse proxy for secure access to the web interface. All wrapped up in docker compose with a bash script to configure and manage the stack.**
 
 ## Project Goals
 
@@ -14,19 +14,43 @@ This this stack is designed to be a semi-automated deployment of the same config
 
 ## Features
 
+### This stack is comprised of the following
+
 - [Pi-hole](https://pi-hole.net/) For ad blocking and local DNS via the image [pihole/pihole](https://hub.docker.com/r/pihole/pihole)
-
 - [Unbound](https://nlnetlabs.nl/projects/unbound/about/) For DoT and a secure recursive resolver [mvance/unbound](https://hub.docker.com/r/mvance/unbound)
-
 - [Nginx](https://www.nginx.com/) For a reverse proxy to Pi-hole and Unbound [nginx](https://hub.docker.com/_/nginx)
-
 - [Docker](https://www.docker.com/) For packing it all together in a portable and reproducible way
 
-## Deployment
+## Requirements
 
-### Requirements
-* Raspberry Pi (tested on Pi 4 and CM4)
-* Raspbian OS (tested on Buster)
-* Docker/Docker-compose
+- Raspberry Pi or similar ARM device
+- Docker/Docker-compose
 
-### Steps
+### Tested Hardware
+
+- [Raspberry Pi Compute Module 4](https://www.raspberrypi.org/products/compute-module-4/)
+- [Raspberry Pi Compute Module 4 IO Board](https://www.raspberrypi.org/products/compute-module-4-io-board/)
+- [Raspberry Pi 4 Model B](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/)
+
+## Installation
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/neilanthunblom/PUN-Private-DNS-Docker-Stack
+cd PUN-Private-DNS-Docker-Stack
+```
+
+### 2. Copy the `sample.env` to `.env` and edit the configuration
+
+```bash
+cp sample.env .env
+vim .env
+```
+
+### 3. Run the setup script
+
+```bash
+chmod +x ./bin/setup.sh
+./bin/setup.sh
+```
